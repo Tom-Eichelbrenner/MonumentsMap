@@ -1603,17 +1603,36 @@ function putMuseeFlag(name, lat, lon, region, site) {
         const html = `
         ${name}
         `
-        const a = document.createElement('a')
-        a.href = "https://" + site
-        a.innerHTML = site
+        let firstThreeLetters = site.substring(0,3)
+        console.log(firstThreeLetters)
         const ul = document.createElement('ul')
         ul.style.listStyle = "none"
-        const li = document.createElement('li')
-        li.id = timestamp.toString()
-        li.innerHTML = html
-        li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon, 'k', timestamp)
-        ul.prepend(li)
-        ul.append(a)
+        if (firstThreeLetters === "www" || firstThreeLetters === "htt"){
+            const a = document.createElement('a')
+            if (firstThreeLetters === "www"){
+                a.href = "http://"  + site
+            } else {
+                a.href = site
+            }
+            a.innerHTML = site
+
+            let li = document.createElement('li')
+            li.id = timestamp.toString()
+            li.innerHTML = html
+            li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon, 'k', timestamp)
+            ul.prepend(li)
+            ul.append(a)
+        } else {
+            const p = document.createElement('p')
+            p.innerHTML = site
+            let li = document.createElement('li')
+            li.id = timestamp.toString()
+            li.innerHTML = html
+            li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon,'k', timestamp)
+            ul.prepend(li)
+            ul.append(p)
+        }
+
 
         let marker = L.marker([lat, lon], {
             icon: greenIcon,

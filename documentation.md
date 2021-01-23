@@ -19,3 +19,7 @@
             3) avec la fonction ``iterateRegions`` je boucle sur mon objet regions, et j'envoie la latitude, la longitude, ainsi que tout les musées présents dans cette région a ma fonction ``putRegionFlag``, je crée de la même facon mon marqueur pour cette région, et j'affiche sur sa popup tous les musées de cette region, puis j'ajoute ce marqueur a ma 'liste de régions'
         3) par défaut, comme la carte n'est pas zoomée, j'affiche seulement un marqueur par région, puis comme pour les monuments, si le zoom > 8, je cache les régions et affiche les musées.
     3) pour récupérer les coordonnées gps de l'utilisateur, j'utilise places.js, une librairie que permet d'autocompleter une adresse dans un input grace a une base de donnée, dès que l'utilisateur valide son adresse, j'affecte a une variable ``userCoords`` la latitude et la longitude de son adresse, et je me sert de ces valeurs pour calculer la distance séparant l'utilisateur du lieu séléctionné.
+    
+CHANGEMENTS RAJOUTES POUR LES LIENS : dans putMuseeFlag
+
+-> je récupère les 3 premières lettres du site du musée, si elles sont égales a 'htm' ou 'www', je le met dans une balise ``<a></a>``, sinon, si c'est un texte genre "voir site de la ville", je le met simplement dans une balise p
