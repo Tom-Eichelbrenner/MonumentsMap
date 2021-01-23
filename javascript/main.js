@@ -1573,7 +1573,7 @@ Papa.parse(musees, {
     complete: function (results) {
         const data = results.data;
         data.map(musee => (
-            putMuseeFlag(musee.nom_du_musee, getLat(musee.coordonnees_finales), getLong(musee.coordonnees_finales), musee.region)
+            putMuseeFlag(musee.nom_du_musee, getLat(musee.coordonnees_finales), getLong(musee.coordonnees_finales), musee.region, musee.sitweb)
         ))
 
 
@@ -1594,26 +1594,32 @@ Papa.parse(musees, {
     delimitersToGuess: [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP],
 })
 
-function putMuseeFlag(name, lat, lon, region) {
+function putMuseeFlag(name, lat, lon, region, site) {
     if (lat === undefined || lon === undefined) {
     } else {
-        addMuseeToRegion(name, lat, lon, region)
+        addMuseeToRegion(name, lat, lon, region, site)
 
         const timestamp = Date.now()
         const html = `
         ${name}
         `
+        const a = document.createElement('a')
+        a.href = site
+        a.innerHTML = site
+        const ul = document.createElement('ul')
+        ul.style.listStyle = "none"
         const li = document.createElement('li')
         li.id = timestamp.toString()
         li.innerHTML = html
         li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon, 'k', timestamp)
-
+        ul.prepend(li)
+        ul.append(a)
 
         let marker = L.marker([lat, lon], {
             icon: greenIcon,
         })
         allMuseums.addLayer(marker);
-        marker.bindPopup(li);
+        marker.bindPopup(ul);
     }
 }
 
