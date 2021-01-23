@@ -1604,7 +1604,7 @@ function putMuseeFlag(name, lat, lon, region, site) {
         ${name}
         `
         const a = document.createElement('a')
-        a.href = site
+        a.href = "https://" + site
         a.innerHTML = site
         const ul = document.createElement('ul')
         ul.style.listStyle = "none"
