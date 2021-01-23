@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/places.js/1.19.0/places.min.js" integrity="sha512-6TSW8PEc+JET/TBENLNC9gKJuEkyhQZ8SEidKis9m0DS+3J3axHbbwYoLeVg8lAJ/1CglDy847pzTCZ0rqmrVg==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="javascript/papaparse.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Projet Javascript</title>
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .custom-popup .leaflet-popup-content-wrapper{
+            background-color: #BADA55;
+            color: black;
+        }
+        .custom-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+            max-height: 100px;
+            overflow: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .custom-popup .leaflet-popup-content-wrapper .leaflet-popup-content::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="custom-popup" id="map">
+    <div style="display:flex;width: 100vw; height: 10vh; position:fixed; z-index: 22222222222; justify-content: space-around; align-content: center; background-color: aquamarine">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input type="search" id="adress-input" class="form-control" placeholder="Votre adresse">
+                </div>
+                <div class="col">
+                    <p id="result">Nombre de kilomètres entre vous et la destination :</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+
+</script>
+<script src="javascript/map.js"></script>
+<script src="javascript/main.js"></script>
+</body>
+</html>
