@@ -22,4 +22,8 @@
     
 CHANGEMENTS RAJOUTES POUR LES LIENS : dans putMuseeFlag
 
--> je récupère les 3 premières lettres du site du musée, si elles sont égales a 'htm' ou 'www', je le met dans une balise ``<a></a>``, sinon, si c'est un texte genre "voir site de la ville", je le met simplement dans une balise p
+je crée une fonction getWebSite, qui me permet de transformer la variable "sitweb" de mon musée dans un tableau avec comme délimiteur les espaces
+pour chauqe mot, si les 3 premières lettres sont "www" ou "htt", c'est que ce mot est le site, ma fonction retourne donc ce mot. si aucun des mots ne commence par htm ou www, je renvoie la variable sitweb en entier.
+
+ensuite, au moment ou j'ajoute le lien du site (dans la fonction putmuséeflag) j'appelle ma fonction getWebSite avec la variable sitweb de mon musée, si le resultat renvoyé commence par "www", j'ajoute en href "http://" + resultat, si il commence par "htt", je met en href le resultat. si le resultat ne commence ni par htm ni par www, c'est qu'il n'y a pas de lien, je ne crée donc pas de href.
+J'ajoute ensuite a ma balise a le texte de getWebSite(site) etc, comme expliqué au dessus.

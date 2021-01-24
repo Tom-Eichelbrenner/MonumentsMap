@@ -1595,6 +1595,16 @@ Papa.parse(musees, {
 })
 
 function putMuseeFlag(name, lat, lon, region, site) {
+    function getWebSite(site) {
+        const arr = site.split(" ")
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].substring(0, 3) === "www" || arr[i].substring(0, 3) === "htt") {
+                return arr[i]
+            }
+        }
+        return site
+    }
+
     if (lat === undefined || lon === undefined) {
     } else {
         addMuseeToRegion(name, lat, lon, region, site)
@@ -1603,35 +1613,24 @@ function putMuseeFlag(name, lat, lon, region, site) {
         const html = `
         ${name}
         `
-        let firstThreeLetters = site.substring(0,3)
-        console.log(firstThreeLetters)
+
+
         const ul = document.createElement('ul')
         ul.style.listStyle = "none"
-        if (firstThreeLetters === "www" || firstThreeLetters === "htt"){
-            const a = document.createElement('a')
-            if (firstThreeLetters === "www"){
-                a.href = "http://"  + site
-            } else {
-                a.href = site
-            }
-            a.innerHTML = site
 
-            let li = document.createElement('li')
-            li.id = timestamp.toString()
-            li.innerHTML = html
-            li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon, 'k', timestamp)
-            ul.prepend(li)
-            ul.append(a)
-        } else {
-            const p = document.createElement('p')
-            p.innerHTML = site
-            let li = document.createElement('li')
-            li.id = timestamp.toString()
-            li.innerHTML = html
-            li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon,'k', timestamp)
-            ul.prepend(li)
-            ul.append(p)
+        const a = document.createElement('a')
+        if (getWebSite(site).substring(0,3) === "www"){
+            a.href = "http://" + getWebSite(site);
+        } else if (getWebSite(site).substring(0,3) === "htt"){
+            a.href = site
         }
+        a.innerHTML = getWebSite(site)
+        let li = document.createElement('li')
+        li.id = timestamp.toString()
+        li.innerHTML = html
+        li.onclick = () => distance(lat, lon, userCoords.lat, userCoords.lon, 'k', timestamp)
+        ul.prepend(li)
+        ul.append(a)
 
 
         let marker = L.marker([lat, lon], {
